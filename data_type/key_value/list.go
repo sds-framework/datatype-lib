@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/ahmetson/datatype-lib/data_type"
+	"github.com/sds-framework/datatype-lib/data_type"
 )
 
 type List struct {

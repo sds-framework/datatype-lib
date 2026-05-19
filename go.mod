@@ -1,4 +1,4 @@
-module github.com/ahmetson/datatype-lib
+module github.com/sds-framework/datatype-lib
 
 go 1.19
 

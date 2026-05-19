@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/ahmetson/datatype-lib/data_type/key_value"
+	"github.com/sds-framework/datatype-lib/data_type/key_value"
 )
 
 // Crud interface adds the database CRUD operations to the data struct.
