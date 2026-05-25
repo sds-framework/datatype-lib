@@ -6,7 +6,7 @@
 //   - [List] is the list of elements but based on the map.
 //     For the user, the list acts as the array.
 //     However, internally it uses a map for optimization.
-package key_value
+package datatype
 
 import (
 	"encoding/json"
@@ -14,8 +14,6 @@ import (
 	"math/big"
 	"strconv"
 	"strings"
-
-	"github.com/sds-framework/datatype"
 )
 
 // KeyValue is the golang's map with the functions.
@@ -223,7 +221,7 @@ func (k KeyValue) String() string {
 
 // Interface representation of this KeyValue
 func (k KeyValue) Interface(i interface{}) error {
-	if !datatype.IsPointer(i) {
+	if !IsPointer(i) {
 		return fmt.Errorf("interface wasn't passed by pointer")
 	}
 	bytes, err := k.Bytes()

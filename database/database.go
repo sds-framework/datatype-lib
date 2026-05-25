@@ -11,8 +11,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/sds-framework/datatype/data_type"
-	"github.com/sds-framework/datatype/data_type/key_value"
+	"github.com/sds-framework/datatype"
 )
 
 // Returns the type of database type
@@ -41,7 +40,7 @@ func detectType(databaseType *sql.ColumnType) string {
 // SetValue sets the value into kv KeyValue.
 // Before setting, the function converts the value into the desired
 // golang parameter
-func SetValue(kv key_value.KeyValue, databaseType *sql.ColumnType, raw interface{}) error {
+func SetValue(kv datatype.KeyValue, databaseType *sql.ColumnType, raw any) error {
 	golangType := detectType(databaseType)
 	if golangType == "" {
 		return fmt.Errorf("unsupported database type %s", databaseType.DatabaseTypeName())
@@ -74,7 +73,7 @@ func SetValue(kv key_value.KeyValue, databaseType *sql.ColumnType, raw interface
 		if !ok {
 			return fmt.Errorf("database value is expected to be '[]byte', but value %v of type %T", raw, raw)
 		}
-		kv.Set(databaseType.Name(), data_type.AddJsonPrefix(value))
+		kv.Set(databaseType.Name(), datatype.AddJsonPrefix(value))
 		return nil
 	case "int64":
 		if raw == nil {

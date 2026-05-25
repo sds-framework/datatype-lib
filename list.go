@@ -1,10 +1,8 @@
-package key_value
+package datatype
 
 import (
 	"fmt"
 	"reflect"
-
-	"github.com/sds-framework/datatype"
 )
 
 type List struct {
@@ -77,13 +75,13 @@ func (q *List) Add(key any, value any) error {
 	if q.IsFull() {
 		return fmt.Errorf("list is already full")
 	}
-	if datatype.IsNil(key) {
+	if IsNil(key) {
 		return fmt.Errorf("the kv parameter is nil")
 	}
-	if datatype.IsPointer(key) {
+	if IsPointer(key) {
 		return fmt.Errorf("the kv was passed by the pointer")
 	}
-	if datatype.IsNil(value) {
+	if IsNil(value) {
 		return fmt.Errorf("the value parameer is nil")
 	}
 
@@ -113,8 +111,8 @@ func (q *List) Add(key any, value any) error {
 }
 
 func (q *List) Exist(key any) bool {
-	if datatype.IsNil(key) ||
-		datatype.IsPointer(key) ||
+	if IsNil(key) ||
+		IsPointer(key) ||
 		q.IsEmpty() {
 		return false
 	}
@@ -135,10 +133,10 @@ func (q *List) Exist(key any) bool {
 // Get the element in the list to the value.
 // Pointer should pass the value
 func (q *List) Get(key any) (any, error) {
-	if datatype.IsNil(key) {
+	if IsNil(key) {
 		return nil, fmt.Errorf("the parameter is nil")
 	}
-	if datatype.IsPointer(key) {
+	if IsPointer(key) {
 		return nil, fmt.Errorf("the kv was passed by the pointer")
 	}
 	if q.IsEmpty() {
