@@ -11,8 +11,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/sds-framework/datatype-lib/data_type"
-	"github.com/sds-framework/datatype-lib/data_type/key_value"
+	"github.com/sds-framework/datatype/data_type"
+	"github.com/sds-framework/datatype/data_type/key_value"
 )
 
 // Returns the type of database type

@@ -15,7 +15,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/sds-framework/datatype-lib/data_type"
+	"github.com/sds-framework/datatype/data_type"
 )
 
 // KeyValue is the golang's map with the functions.

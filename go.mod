@@ -1,11 +1,8 @@
-module github.com/sds-framework/datatype-lib
+module github.com/sds-framework/datatype
 
 go 1.19
 
-require (
-	github.com/google/uuid v1.2.0
-	github.com/stretchr/testify v1.8.2
-)
+require github.com/stretchr/testify v1.8.2
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
