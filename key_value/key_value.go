@@ -15,7 +15,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/sds-framework/datatype/data_type"
+	"github.com/sds-framework/datatype"
 )
 
 // KeyValue is the golang's map with the functions.
@@ -223,7 +223,7 @@ func (k KeyValue) String() string {
 
 // Interface representation of this KeyValue
 func (k KeyValue) Interface(i interface{}) error {
-	if !data_type.IsPointer(i) {
+	if !datatype.IsPointer(i) {
 		return fmt.Errorf("interface wasn't passed by pointer")
 	}
 	bytes, err := k.Bytes()

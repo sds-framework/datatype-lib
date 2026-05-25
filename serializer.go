@@ -1,4 +1,4 @@
-package data_type
+package datatype
 
 import (
 	"encoding/json"
@@ -6,18 +6,18 @@ import (
 	"reflect"
 )
 
-func IsNil(v interface{}) bool {
+func IsNil(v any) bool {
 	return v == nil
 }
 
-func IsPointer(body interface{}) bool {
+func IsPointer(body any) bool {
 	v := reflect.ValueOf(body)
-	return v.Kind() == reflect.Ptr
+	return v.Kind() == reflect.Pointer
 }
 
 // Serialize wraps the JSON abi interface to the internal data type.
 // It's blockchain agnostic.
-func Serialize(body interface{}) ([]byte, error) {
+func Serialize(body any) ([]byte, error) {
 	if IsPointer(body) {
 		return nil, fmt.Errorf("body was passed by a pointer")
 	}
@@ -30,7 +30,7 @@ func Serialize(body interface{}) ([]byte, error) {
 
 // Deserialize the given string to the map, slice
 // or struct.
-func Deserialize(bytes []byte, body interface{}) error {
+func Deserialize(bytes []byte, body any) error {
 	if IsNil(body) {
 		return fmt.Errorf("body parameter is a nil")
 	}

@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/sds-framework/datatype/data_type"
+	"github.com/sds-framework/datatype"
 )
 
 type List struct {
-	l         map[interface{}]interface{}
+	l         map[any]any
 	length    uint
 	cap       uint
 	keyType   reflect.Type
@@ -31,7 +31,7 @@ func NewList() *List {
 		valueType: nil,
 		cap:       DefaultCap,
 		length:    0,
-		l:         map[interface{}]interface{}{},
+		l:         map[any]any{},
 	}
 }
 
@@ -47,7 +47,7 @@ func (q *List) IsFull() bool {
 	return q.length == q.cap
 }
 
-func (q *List) List() map[interface{}]interface{} {
+func (q *List) List() map[any]any {
 	return q.l
 }
 
@@ -73,17 +73,17 @@ func (q *List) Cap() uint {
 // the expected type, then
 // It will silently drop it.
 // Silently drop if the queue is full
-func (q *List) Add(key interface{}, value interface{}) error {
+func (q *List) Add(key any, value any) error {
 	if q.IsFull() {
 		return fmt.Errorf("list is already full")
 	}
-	if data_type.IsNil(key) {
+	if datatype.IsNil(key) {
 		return fmt.Errorf("the kv parameter is nil")
 	}
-	if data_type.IsPointer(key) {
+	if datatype.IsPointer(key) {
 		return fmt.Errorf("the kv was passed by the pointer")
 	}
-	if data_type.IsNil(value) {
+	if datatype.IsNil(value) {
 		return fmt.Errorf("the value parameer is nil")
 	}
 
@@ -112,9 +112,9 @@ func (q *List) Add(key interface{}, value interface{}) error {
 	)
 }
 
-func (q *List) Exist(key interface{}) bool {
-	if data_type.IsNil(key) ||
-		data_type.IsPointer(key) ||
+func (q *List) Exist(key any) bool {
+	if datatype.IsNil(key) ||
+		datatype.IsPointer(key) ||
 		q.IsEmpty() {
 		return false
 	}
@@ -134,11 +134,11 @@ func (q *List) Exist(key interface{}) bool {
 
 // Get the element in the list to the value.
 // Pointer should pass the value
-func (q *List) Get(key interface{}) (interface{}, error) {
-	if data_type.IsNil(key) {
+func (q *List) Get(key any) (any, error) {
+	if datatype.IsNil(key) {
 		return nil, fmt.Errorf("the parameter is nil")
 	}
-	if data_type.IsPointer(key) {
+	if datatype.IsPointer(key) {
 		return nil, fmt.Errorf("the kv was passed by the pointer")
 	}
 	if q.IsEmpty() {
@@ -159,7 +159,7 @@ func (q *List) Get(key interface{}) (interface{}, error) {
 
 // GetFirst returns the first added element.
 // Returns the kv, value and error if it can not find it.
-func (q *List) GetFirst() (interface{}, interface{}, error) {
+func (q *List) GetFirst() (any, any, error) {
 	for key, value := range q.l {
 		return key, value, nil
 	}
@@ -168,7 +168,7 @@ func (q *List) GetFirst() (interface{}, interface{}, error) {
 }
 
 // Take is a Get, but removes the returned element from the list
-func (q *List) Take(key interface{}) (interface{}, error) {
+func (q *List) Take(key any) (any, error) {
 	value, err := q.Get(key)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get the element")
@@ -181,7 +181,7 @@ func (q *List) Take(key interface{}) (interface{}, error) {
 }
 
 // TakeFirst is a GetFirst, but removes the element from the list
-func (q *List) TakeFirst() (interface{}, interface{}, error) {
+func (q *List) TakeFirst() (any, any, error) {
 	key, value, err := q.GetFirst()
 	if err != nil {
 		return nil, nil, fmt.Errorf("list.GetFirst: %w", err)

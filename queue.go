@@ -6,7 +6,7 @@
 //     Queue doesn't allow addition of any kind of element. All elements should have the same type.
 //   - Key_value different kinds of maps
 //   - serialize functions to serialize any structure to the bytes and vice versa.
-package data_type
+package datatype
 
 import (
 	"container/list"
