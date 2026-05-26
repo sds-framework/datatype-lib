@@ -1,4 +1,4 @@
-module github.com/sds-framework/datatype
+module github.com/noPerfection/datatype
 
 go 1.19
 

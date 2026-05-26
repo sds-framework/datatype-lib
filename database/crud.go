@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/sds-framework/datatype"
+	"github.com/noPerfection/datatype"
 )
 
 // Crud interface adds the database CRUD operations to the data struct.

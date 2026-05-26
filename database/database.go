@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/sds-framework/datatype"
+	"github.com/noPerfection/datatype"
 )
 
 // Returns the type of database type
